@@ -18,8 +18,8 @@ class CreateAlumnesTable extends Migration
             $table->foreignId('id_cicles')
                 ->nullable()
                 ->constrained('cicles')
-                ->cascadeOnUpdate()
-                ->nullOnDelete();
+                ->nullOnDelete()
+                ->cascadeOnUpdate();
             $table->string('nom');
             $table->string('cognom');
             $table->string('dni');

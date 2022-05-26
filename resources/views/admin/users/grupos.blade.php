@@ -2,6 +2,9 @@
 
 @section('content')
 
+<div class="row titolar">
+    <h1 style="text-align: center;">MODULS</h1>
+</div>
 <div class="cajaCentral"> 
     <table class="table">
         <tr class="h4 titol">
@@ -15,11 +18,21 @@
             <tr class="text">
     
                 <td >
-                    {{$grupo->cicle->nom}}
+                    @if(isset($grupo->cicle->nom))
+                        {{$grupo->cicle->nom}}
+                    @else
+                        No hay ciclo asignado
+                    @endif
                 </td>
                 
                 <td>
-                    {{$grupo->users->name}}
+                    @if(isset($grupo->users->name))
+                        {{$grupo->users->name}}
+                    
+                    @else
+                        No profe asignado
+
+                    @endif
                 </td>
                 <td>
                     {{$grupo->nom}}

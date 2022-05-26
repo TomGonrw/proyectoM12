@@ -1,6 +1,9 @@
 @extends('layouts.inserir')
 
 @section('content')
+<div class="row titolar">
+    <h1 style="text-align: center;">INSERTAR ALUMNO</h1>
+</div>
 
 <div class="cajaCentral"> 
     <form method="POST" action="{{ route('inserirA') }}">
@@ -13,7 +16,7 @@
 
         <div class="form-group">
             <label for="cilce">Cicles</label>
-            <select id="cicle" name="cicle">
+            <select id="cicle" name="cicle" class="form-select">
                 @foreach($cicles as $cicle)
                     <option value="{{$cicle->id}}">{{$cicle->nom}}</option>
                 @endforeach
@@ -38,11 +41,9 @@
             <label for="direccio">Direccio</label>
             <input type="string" class="form-control" id="direccio" name="direccio" aria-describedby="emailHelp" placeholder="Escriu el direccio">
         </div>
-
-
-        <div class="form-group">
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
+        <br>
+        <button type="button" class="btn btn-success " onclick="document.location='users'"> ATRAS</button>
+        <button type="submit" class="btn btn-primary">ENVIAR</button>
 
   
 

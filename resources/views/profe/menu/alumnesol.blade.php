@@ -30,17 +30,19 @@
     .titol {
         font-size: 20px;
     }
-    
+    .titole{
+    }
 
 </style>
 <body>
 
-<div class="row titolar">
-    <h1 style="margin-left: 470px;">{{$alumn->nom}} {{ $alumn->cognom }}</h1>
+<div class="row titolar titole">
+    <h1 style="text-align: center;">{{$alumn->nom}} {{ $alumn->cognom }}</h1>
 </div>
 
-<div class="row cajaCentral">
-     
+
+<div class=" cajaCentral">
+    <div class="row">
     <div class="col d-flex justify-content-center text-center" >
         <table class="table info">
                 <tr>
@@ -114,7 +116,7 @@
                 <?php 
                     foreach($notauf as $not) {
                         if ($not < 5) {
-                            break;
+                           $notaprobi = null;
                         } else {
                             $j++;
                             $notaprobi += ($horauf[$j] / $horas) * $not;
@@ -141,10 +143,12 @@
                     <button  style="margin-top: 10px;" type="button" class="btn btn-success"> GENERAR PDF</button>
                 </a>
             </div>
-        
     </div>
-
+   
+    </div>
+    <button  style="margin-top: 10px;" type="button" onclick="document.location='{{route('mostrarAlumnes', $id_cicles)}}'" class="btn btn-success">ATRAS</button>
 </div>
+<br>
 
 </body>
 @stop

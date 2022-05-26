@@ -160,8 +160,13 @@ class homeController extends Controller
     public function inserirgr(Request $usu)
     {
         $nom = $usu->nom;
-        $cicle = $usu->cicle;
         $users = $usu->users;
+        if (isset($usu->cicle)) {
+            $cicle = $usu->cicle;
+        }else{
+            DB::insert("INSERT INTO `moduls` (`nom`, `id_users`) VALUES ('$nom', '$users')");
+            return redirect()->route('vistaUsers3'); 
+        }
 
         DB::insert("INSERT INTO `moduls` (`nom`, `id_cicles`, `id_users`) VALUES ('$nom', '$cicle', '$users')");
         return redirect()->route('vistaUsers3');
@@ -170,9 +175,17 @@ class homeController extends Controller
     public function inseriruf(Request $usu)
     {
         $nom = $usu->nom;
-        $hores = $usu->horas;
-        $modul = $usu->modul;
-
+        if (isset($usu->horas)){
+            $hores = $usu->horas;
+        } else{
+            $hores = 0;
+        }
+        if (isset($usu->modul)){
+            $modul = $usu->modul;
+        }else{
+            DB::insert("INSERT INTO `ufs` (`nom`,`horas`) VALUES ('$nom','$hores')");
+            return redirect()->route('vistaUsers4');
+        }
         DB::insert("INSERT INTO `ufs` (`nom`, `id_moduls`,`horas`) VALUES ('$nom', '$modul','$hores')");
         return redirect()->route('vistaUsers4');
     }
@@ -180,11 +193,16 @@ class homeController extends Controller
     public function inseriral(Request $usu)
     {
         $nom = $usu->nom;
-        $cicle = $usu->cicle;
         $cognom = $usu->cognom;
         $dni = $usu->dni;
         $correu = $usu->correu;
         $direccio = $usu->direccio;
+        if(isset($usu->cicle)){
+            $cicle = $usu->cicle;
+        }else{     
+            DB::insert("INSERT INTO `alumnes` (`nom`,`cognom`,`dni`,`correu`,`direccio`) VALUES ('$nom','$cognom','$dni','$correu','$direccio')");
+            return redirect()->route('vistaUsers5');
+        }
 
 
         DB::insert("INSERT INTO `alumnes` (`nom`, `id_cicles`,`cognom`,`dni`,`correu`,`direccio`) VALUES ('$nom', '$cicle','$cognom','$dni','$correu','$direccio')");

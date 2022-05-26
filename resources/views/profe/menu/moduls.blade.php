@@ -17,9 +17,8 @@
 <body>
 
 <div class="row titolar">
-    <h1 style="margin-left: 470px;">MODULS</h1>
+    <h1 style="text-align: center;">ALUMNES</h1>
 </div>
-
 <div class="row cajaCentral">
     <?php
         $user = auth()->user();

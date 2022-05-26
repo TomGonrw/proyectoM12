@@ -1,7 +1,9 @@
 @extends('layouts.inserir')
 
 @section('content')
-
+<div class="row titolar">
+    <h1 style="text-align: center;">CICLOS</h1>
+</div>
 <div class="cajaCentral"> 
     <table class="table">
         <tr class="h4 titol">

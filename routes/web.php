@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('send-email-pdf', [\App\Http\Controllers\Profes\homeController::class,  'emailpdf']);
+
 Route::get('/home_inicio',function(){
     dump("hola");
 if (auth()->user()->Admin == 1) {
@@ -156,17 +158,18 @@ Route::group(['middleware' => ['changepassword']], function () {
 
     Route::get('/profe/alumnes/{id_cicles}', [\App\Http\Controllers\Profes\homeController::class, 'alumnes']) -> middleware(['middleware' => 'role:profe'])->name('mostrarAlumnes');
     
-    Route::get('/profe/alumne/{id}', [\App\Http\Controllers\Profes\homeController::class, 'alumneSol']) -> middleware(['middleware' => 'role:profe'])->name('alumneSol');
+    Route::get('/profe/alumne/{id}/{id_cicle}', [\App\Http\Controllers\Profes\homeController::class, 'alumneSol']) -> middleware(['middleware' => 'role:profe'])->name('alumneSol');
     
     Route::get('/profe/nota', [\App\Http\Controllers\Profes\homeController::class, 'notes']) -> middleware(['middleware' => 'role:profe'])->name('nota');
 
     Route::get('/profe/inserirnotasal/{id}/{id_cicles}', [\App\Http\Controllers\Profes\homeController::class, 'inserirnotas']) -> middleware(['middleware' => 'role:profe'])->name('inserirNotasAl');
 
-    Route::get('/profe/insnotas/{id}', [\App\Http\Controllers\Profes\homeController::class, 'insnotas']) -> middleware(['middleware' => 'role:profe'])->name('insnotas');
+    Route::get('/profe/insnotas/{id}/{id_modul}/{id_cicle}', [\App\Http\Controllers\Profes\homeController::class, 'insnotas']) -> middleware(['middleware' => 'role:profe'])->name('insnotas');
 
     Route::get('/profe/pdf/{id}', [\App\Http\Controllers\Profes\homeController::class, 'pdfs']) -> middleware(['middleware' => 'role:profe'])->name('pdf');
 
     Route::get('/profe/notasmodul/{id}', [\App\Http\Controllers\Profes\homeController::class, 'veurenotesmodul']) -> middleware(['middleware' => 'role:profe'])->name('notasGrup');
+
 
      });
 

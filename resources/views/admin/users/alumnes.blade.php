@@ -1,6 +1,9 @@
 @extends('layouts.inserir')
 
 @section('content')
+<div class="row titolar">
+    <h1 style="text-align: center;">ALUMNES</h1>
+</div>
 
 <div class="cajaCentral"> 
     <table class="table">
@@ -17,7 +20,11 @@
         @foreach($alumnes as $alumne)
             <tr class="text">
                 <td >
-                    {{$alumne->cicles->nom}}
+                    @if(isset($alumne->cicles->nom))
+                        {{$alumne->cicles->nom}}
+                    @else
+                        No hay ciclo asignado
+                    @endif
                 </td>
                 <td >
                     {{$alumne->nom}}
@@ -55,7 +62,7 @@
         @endforeach
     </table>
     <div class="text-right">
-        <button type="button" class="btn btn-success " onclick="document.location='users'"> ATRAS</button>
+        <button type="button" class="btn btn-success " onclick="document.location='/admin/users'"> ATRAS</button>
         <button type="button" class="btn btn-success " onclick="document.location='inserira'"> AFEGIR UN NOU ALUMNE</button>
     </div>
 </div>

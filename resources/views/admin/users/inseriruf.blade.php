@@ -1,7 +1,9 @@
 @extends('layouts.inserir')
 
 @section('content')
-
+<div class="row titolar">
+    <h1 style="text-align: center;">INSERIR UF</h1>
+</div>
 <div class="cajaCentral"> 
     <form method="POST" action="{{ route('inserirU') }}">
         @csrf
@@ -16,15 +18,16 @@
         </div>
         <div class="form-group">
             <label for="users">Moduls</label>
-            <select id="modul" name="modul">
+            <select id="modul" name="modul" Class="form-select">
                 @foreach($moduls as $modul)
                     <option value="{{$modul->id}}">{{$modul->nom}}</option>
                 @endforeach
             </select>
         </div>
-        <div class="form-group">
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
+        <br>
+        <button type="button" class="btn btn-success " onclick="document.location='/admin/ufs'"> ATRAS</button>
+        <button type="submit" class="btn btn-primary">ENVIAR</button>
+        
 
   
 

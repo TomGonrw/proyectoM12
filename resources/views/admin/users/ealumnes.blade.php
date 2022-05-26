@@ -1,7 +1,9 @@
 @extends('layouts.inserir')
 
 @section('content')
-
+<div class="row titolar">
+    <h1 style="text-align: center;">EDITAR ALUMNE</h1>
+</div>
 <div class="cajaCentral"> 
 
     <form method="POST" action="{{ route('upalumne', $alumne->id) }}">
@@ -29,23 +31,23 @@
         </div>
         <div class="form-group">
             <label for="cicle">Cicle</label>   
-                <select name="cicle" id="cicle">
+                <select name="cicle" id="cicle" class="form-select">
                     @foreach($cicles as $cicle)
-                        @if($cicle->id == $alumne->cicles->id)
-                            <option value="{{$cicle->id}}" selected>{{$cicle->nom}}</option>
+                        @if(isset($cicle->id) && isset($alumne->cicles->id))
+                            @if($cicle->id == $alumne->cicles->id)
+                                <option value="{{$cicle->id}}" selected>{{$cicle->nom}}</option>
+                            @else
+                                <option value="{{$cicle->id}}">{{$cicle->nom}}</option>
+                            @endif
                         @else
                             <option value="{{$cicle->id}}">{{$cicle->nom}}</option>
                         @endif
                     @endforeach
                 </select>
         </div>
-
-
-      
-    
-        <div class="form-group">
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
+        <BR>
+            <button type="button" class="btn btn-success " onclick="document.location='/admin/alumnes'"> ATRAS</button>
+            <button type="submit" class="btn btn-primary">ENVIAR</button>
     </form>
 <div>
 @stop

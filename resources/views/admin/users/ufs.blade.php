@@ -1,7 +1,9 @@
 @extends('layouts.inserir')
 
 @section('content')
-
+<div class="row titolar">
+    <h1 style="text-align: center;">UFS</h1>
+</div>
 <div class="cajaCentral"> 
     <table class="table">
         <tr class="h4 titol">
@@ -18,7 +20,11 @@
                     {{$uf->nom}}
                 </td>
                 <td>
-                    {{$uf->moduls->nom}}
+                    @if(isset($uf->moduls->nom))
+                        {{$uf->moduls->nom}}
+                    @else
+                        No hay modulo asignado
+                    @endif
                 </td>
                 <td>
                     {{$uf->horas}}

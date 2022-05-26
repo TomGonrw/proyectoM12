@@ -18,13 +18,13 @@ class CreateModulsTable extends Migration
             $table->foreignId('id_cicles')
                 ->nullable()
                 ->constrained('cicles')
-                ->cascadeOnUpdate()
-                ->nullOnDelete();
+                ->nullOnDelete()
+                ->cascadeOnUpdate();
             $table->foreignId('id_users')
                 ->nullable()
                 ->constrained('users')
-                ->cascadeOnUpdate()
-                ->nullOnDelete();
+                ->nullOnDelete()
+                ->cascadeOnUpdate();
             $table->string('nom');
             $table->string('nomllarg');
             $table->timestamps();

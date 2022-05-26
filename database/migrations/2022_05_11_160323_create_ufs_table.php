@@ -18,8 +18,8 @@ class CreateUfsTable extends Migration
             $table->foreignId('id_moduls')
                 ->nullable()
                 ->constrained('moduls')
-                ->cascadeOnUpdate()
-                ->nullOnDelete();
+                ->nullOnDelete()
+                ->cascadeOnUpdate();
             $table->string('nom');
             $table->integer('horas');
             $table->timestamps();

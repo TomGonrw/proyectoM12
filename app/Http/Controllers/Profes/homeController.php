@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use SebastianBergmann\CodeUnit\FunctionUnit;
 use PDF;
 use App;
+use Mail;
 
 class homeController extends Controller
 {
@@ -38,10 +39,12 @@ class homeController extends Controller
         ->where("id_cicles","=", $id)
         ->get();
 
-        return view('profe.menu.alumnes',compact('idalumn'));
+        $id_cicle = $id;
+
+        return view('profe.menu.alumnes',compact('idalumn','id_cicle'));
     }
 
-    public function alumneSol($id)
+    public function alumneSol($id,$id_ciclce)
     {
          
         $alumn = DB::table("alumnes")
@@ -52,7 +55,9 @@ class homeController extends Controller
 
         $modul = DB::table('moduls')->where('id_cicles', $alumne->id_cicles)->get();
         
-        return view('profe.menu.alumnesol',compact('alumn', 'alumne', 'modul'));
+        $id_cicles = $id_ciclce;
+
+        return view('profe.menu.alumnesol',compact('alumn', 'alumne', 'modul', 'id_cicles'));
     }
     public function pdfs($id)
     {
@@ -83,12 +88,14 @@ class homeController extends Controller
         $x = DB::table('ufs')
         ->where('id_moduls','=',$id)
         ->count();
-        return view('profe.menu.inserirnotas',compact('alumne','uf','x'));
+        $id_modul = $id;
+        $id_cicle = $id_cicles;
+        return view('profe.menu.inserirnotas',compact('alumne','uf','x','id_modul','id_cicle'));
     }
 
 
 
-    public function insnotas(Request $request,$id){
+    public function insnotas(Request $request,$id,$id_modul,$id_cicle){
       
         foreach ($request->notes as $uf => $nota){
             $pra = DB::table('notas')
@@ -100,19 +107,28 @@ class homeController extends Controller
                 $notaalu->alumne_id = $id;
                 $notaalu->uf_id = $uf;
                 $notaalu->nota = $nota; 
-                $notaalu->comentaris = $request->comentaris;
+                if (isset($request->comentaris)){
+                    $notaalu->comentaris = $request->comentaris;
+                } else{
+                    $notaalu->comentaris = "No hay comentarios";
+                }
                 $notaalu ->save();
             } else {
                 $notaalu = new Nota;
                 $notaalu->alumne_id = $id;
                 $notaalu->uf_id = $uf;
                 $notaalu->nota = $nota; 
-                $notaalu->comentaris = $request->comentaris;
+                if (isset($request->comentaris)){
+                    $notaalu->comentaris = $request->comentaris;
+                } else{
+                    $notaalu->comentaris = "No hay comentarios";
+                }
                 $notaalu ->save(); 
             }
       
         }
-        return redirect('/home_inicio');
+
+        return redirect()->route('inserirNotasAl',["id"=>$id_modul,"id_cicles"=>$id_cicle]);
     }
 
 
@@ -126,6 +142,23 @@ class homeController extends Controller
 
         
         return view('profe.menu.notasmodul', compact('alumnes', 'modul', 'cicle'));
+    }
+    
+    public function emailpdf()
+    {
+        $data["email"] = "talmonte@inscamidemar.cat";
+        $data["title"] = "From ItSolutionStuff.com";
+        $data["body"] = "This is Demo";
+
+        $pdf = PDF::loadView('profe.menu.notapdf', $data);
+  
+        Mail::send('profe.menu.notapdf', $data, function($message)use($data, $pdf) {
+            $message->to($data["email"], $data["email"])
+                    ->subject($data["title"])
+                    ->attachData($pdf->output(), "text.pdf");
+        });
+  
+        dd('Mail sent successfully');
     }
 
 

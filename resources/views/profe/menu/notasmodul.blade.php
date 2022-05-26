@@ -18,10 +18,9 @@
 </style>
 </head>
 <div class="row titolar">
-  <h1 style="margin-left: 470px;">{{$cicle->nom}}</h1> 
+  <h1 style="text-align: center;">{{$cicle->nom}}</h1> 
 </div>
-
-<div class="row cajaCentral">
+<div class="cajaCentral">
 
   @foreach ($modul as $mod)
 
@@ -118,5 +117,10 @@
         </tr>
     </table>
     @endforeach
+    <button  style="margin-top: 10px;" type="button" onclick="document.location='/profe/menu'" class="btn btn-success">ATRAS</button>
+
 </div>
+<br>
+
+
 @stop

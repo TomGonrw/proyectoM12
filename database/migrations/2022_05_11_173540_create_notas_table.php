@@ -18,13 +18,13 @@ class CreateNotasTable extends Migration
             $table->foreignId('alumne_id')
                 ->nullable()
                 ->constrained('alumnes')
-                ->cascadeOnUpdate()
-                ->nullOnDelete();
+                ->nullOnDelete()
+                ->cascadeOnUpdate();
             $table->foreignId('uf_id')
                 ->nullable()
                 ->constrained('ufs')
-                ->cascadeOnUpdate()
-                ->nullOnDelete();
+                ->nullOnDelete()
+                ->cascadeOnUpdate();
             $table->timestamps();
             $table->integer('nota');
             $table->string('comentaris');
